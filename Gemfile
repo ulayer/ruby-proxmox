@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in proxmox.gemspec
+# Specify your gem's dependencies in ruby-proxmox.gemspec
 gemspec
 
 group :developpement do

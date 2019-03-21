@@ -1,17 +1,11 @@
 # Proxmox
 
-You need to manage a proxmox host with Ruby? This library is for you.
+A ruby gem for managing Proxmox Servers with Ruby. Based on https://github.com/nledez/proxmox
 
-!!! Warning, it's a experimental version. Some methods could be renamed !!!
+### Usage Information
 
 Current build:
-[![Build Status](https://travis-ci.org/nledez/proxmox.png)](https://travis-ci.org/nledez/proxmox)
-[![Coverage Status](https://coveralls.io/repos/nledez/proxmox/badge.png)](https://coveralls.io/r/nledez/proxmox)
-[![Dependency Status](https://gemnasium.com/nledez/proxmox.png)](https://gemnasium.com/nledez/proxmox)
-[![Code Climate](https://codeclimate.com/github/nledez/proxmox.png)](https://codeclimate.com/github/nledez/proxmox)
-[![Inline docs](http://inch-ci.org/github/nledez/proxmox.png)](http://inch-ci.org/github/nledez/proxmox)
-
-[RubyGem](http://rubygems.org/gems/proxmox)
+[RubyGem](http://rubygems.org/gems/ruby-proxmox)
 
 [Rubydoc](http://rubydoc.info/github/nledez/proxmox/master/frames)
 
@@ -24,9 +18,6 @@ work for me. No tests, use ssh.
 Documentation from:
 - http://pve.proxmox.com/wiki/Proxmox_VE_API
 - http://pve.proxmox.com/pve2-api-doc/
-
-So I start to create one fully tested (TDD method).
-
 
 ## Installation
 

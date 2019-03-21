@@ -4,13 +4,13 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'proxmox/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'proxmox'
+  spec.name          = 'ruby-proxmox'
   spec.version       = Proxmox::VERSION
-  spec.authors       = ['Nicolas Ledez']
-  spec.email         = ['github@ledez.net']
-  spec.description   = 'A library to drive a Proxmox host'
-  spec.summary       = 'You need to manage a proxmox host with Ruby? This library is for you.'
-  spec.homepage      = 'https://github.com/nledez/proxmox'
+  spec.authors       = ['Nathaniel Suchy', 'Nicolas Ledez']
+  spec.email         = ['me@lunorian.is']
+  spec.description   = 'A ruby gem for managing Proxmox Servers with Ruby. Based on https://github.com/nledez/proxmox'
+  spec.summary       = 'A ruby gem for managing Proxmox Servers with Ruby. Based on https://github.com/nledez/proxmox'
+  spec.homepage      = 'https://github.com/ulayer/ruby-proxmox'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split($INPUT_RECORD_SEPARATOR)

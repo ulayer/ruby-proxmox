@@ -334,6 +334,11 @@ module Proxmox
       http_action_put("nodes/#{@node}/openvz/#{vmid}/config", data)
     end
 
+    # Reset Qemu
+    def qemu_reset(vmid)
+      http_action_post("nodes/#{@node}/qemu/#{vmid}/status/reset")
+    end
+
     private
 
     # Methods manages auth
