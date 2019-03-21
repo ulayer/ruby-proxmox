@@ -334,7 +334,37 @@ module Proxmox
       http_action_put("nodes/#{@node}/openvz/#{vmid}/config", data)
     end
 
-    # Reset Qemu
+    # Current Qemu VM
+    def qemu_current(vmid)
+      http_action_get("nodes/#{@node}/qemu/#{vmid}/status/current")
+    end
+
+    # Start Qemu VM
+    def qemu_start(vmid)
+      http_action_post("nodes/#{@node}/qemu/#{vmid}/status/start")
+    end
+
+    # Stop Qemu VM
+    def qemu_stop(vmid)
+      http_action_post("nodes/#{@node}/qemu/#{vmid}/status/stop")
+    end
+
+    # Resume Qemu VM
+    def qemu_resume(vmid)
+      http_action_post("nodes/#{@node}/qemu/#{vmid}/status/resume")
+    end
+
+    # Suspend Qemu VM
+    def qemu_suspend(vmid)
+      http_action_post("nodes/#{@node}/qemu/#{vmid}/status/suspend")
+    end
+
+    # Shutdown Qemu VM
+    def qemu_shutdown(vmid)
+      http_action_post("nodes/#{@node}/qemu/#{vmid}/status/shutdown")
+    end
+
+    # Reset Qemu VM
     def qemu_reset(vmid)
       http_action_post("nodes/#{@node}/qemu/#{vmid}/status/reset")
     end
