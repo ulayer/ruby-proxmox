@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Qemu
      # Current Qemu VM
      def qemu_current(vmid)
