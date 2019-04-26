@@ -17,7 +17,7 @@ work for me. No tests, use ssh.
 
 Documentation from:
 - http://pve.proxmox.com/wiki/Proxmox_VE_API
-- http://pve.proxmox.com/pve2-api-doc/
+- https://pve.proxmox.com/pve-docs/api-viewer/index.html
 
 ## Installation
 
