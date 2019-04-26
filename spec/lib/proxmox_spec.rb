@@ -4,7 +4,7 @@ require 'proxmox'
 
 describe Proxmox do
   before(:each) do
-    @common_headers_in = { 'User-Agent' => 'Ruby',
+    @common_headers_in = { 'User-Agent' => 'rest-client/2.0.2 (darwin17.7.0 x86_64) ruby/2.5.3p105',
                            'Cookie' => /.*/,
                            'Csrfpreventiontoken' => /.*/ }
     @common_headers_out = { connection: 'close',
@@ -15,7 +15,7 @@ describe Proxmox do
     stub_request(:post, 'http://localhost:8006/api2/json/access/ticket').with(
       headers: {
         'Content-Type' => 'application/x-www-form-urlencoded',
-        'User-Agent' => 'Ruby'
+        'User-Agent' => 'rest-client/2.0.2 (darwin17.7.0 x86_64) ruby/2.5.3p105'
       },
       body: {
         'username' => 'root',
@@ -64,7 +64,7 @@ describe Proxmox do
     stub_request(:post, 'http://localhost:8006/api2/json/access/ticket').with(
       headers: {
         'Content-Type' => 'application/x-www-form-urlencoded',
-        'User-Agent' => 'Ruby'
+        'User-Agent' => 'rest-client/2.0.2 (darwin17.7.0 x86_64) ruby/2.5.3p105'
       },
       body: {
         'username' => 'root',
