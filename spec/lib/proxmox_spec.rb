@@ -28,7 +28,7 @@ describe Proxmox do
       body: '{"data":{"cap":{"dc":{"Sys.Audit":1},"access":{"Group.Allocate":1,"User.Modify":1},"nodes":{"Sys.Audit":1,"Sys.Syslog":1,"Sys.Console":1,"Sys.Modify":1,"Sys.PowerMgmt":1},"vms":{"VM.Backup":1,"VM.Allocate":1,"VM.Config.CPU":1,"VM.Config.Network":1,"VM.Migrate":1,"VM.Config.Memory":1,"VM.Config.Options":1,"Permissions.Modify":1,"VM.Monitor":1,"VM.Console":1,"VM.Config.Disk":1,"VM.Config.HWType":1,"VM.Clone":1,"VM.Snapshot":1,"VM.Audit":1,"VM.PowerMgmt":1,"VM.Config.CDROM":1},"storage":{"Datastore.AllocateTemplate":1,"Datastore.Allocate":1,"Datastore.Audit":1,"Permissions.Modify":1,"Datastore.AllocateSpace":1}},"CSRFPreventionToken":"51F00E60:Pnd0AHehuTE++j87nUz0nLuyW+0","ticket":"PVE:root@pam:51F00E60::OS5lBKlaabgnmekdbVY2JYAbd5Z/MPWCeZ9b33UwjsE1yVB1esIwUQoXJ4Xgb/+UVE9mtS2K3dJ65wyPDsGYTDc0TCl0VmdOGz7djXMlMy5ShRjXcX/GLs77LHXlLQOO+ED/jCoz0tHV55igNSBNMG2UrSLlTGvgm8zf1fNqAsVszrAWgeFu+e/1CLIfs//cWyimBuDx+r3m/NOjaoyeb2u63eBCPrWyEiCJZniMZDVnqqQcOm32tE2XQj4D2LS+xaHn2fdZDlcAo0uY4qVspKiMjf9g2AudRblkobCTf7KdhanIm0kCSqkvHJy2EMcAbxcqnGnjPiYSH0WYZMTnlA==","username":"root@pam"}}'
     )
 
-    @server1 = Proxmox::Proxmox.new('http://localhost:8006/api2/json/', 'localhost', 'root', 'secret', 'pam')
+    @server1 = Proxmox::Proxmox.new(url: 'http://localhost:8006/api2/json/', node: 'localhost', username: 'root', password: 'secret', realm: 'pam')
   end
 
   describe 'get' do
@@ -78,7 +78,7 @@ describe Proxmox do
     )
     expect(@server1.connection_status).to eq 'connected'
 
-    server2 = Proxmox::Proxmox.new('http://localhost:8006/api2/json/', 'localhost', 'root', 'bad', 'pam')
+    server2 = Proxmox::Proxmox.new(url: 'http://localhost:8006/api2/json/', node: 'localhost', username: 'root', password: 'bad', realm: 'pam')
     expect(server2.connection_status).to eq 'error'
   end
 
@@ -143,7 +143,7 @@ describe Proxmox do
       expect(@server1.openvz_get).to be_an_instance_of Hash
       expect(@server1.openvz_get.keys.sort).to be_eql %w(100 101)
 
-      server2 = Proxmox::Proxmox.new('http://localhost:8006/api2/json/', 'otherone', 'root', 'secret', 'pam')
+      server2 = Proxmox::Proxmox.new(url: 'http://localhost:8006/api2/json/', node: 'otherone', username: 'root', password: 'secret', realm: 'pam')
       expect(server2.openvz_get).to be_an_instance_of Hash
       expect(server2.openvz_get.keys.sort).to be_eql %w(100 101 102)
     end
@@ -291,4 +291,13 @@ describe Proxmox do
       @server1.openvz_config_set(200, 'searchdomain' => 'other.com')
     end
   end
+
+  # describe 'nodes' do
+  #   it 'should get a list of nodes' do
+  #     stub_request(:get, "http://localhost:8006/api2/json/nodes").
+  #         with(headers: @common_headers_in).
+  #         to_return(status: 200, body: "", headers: {})
+  #     expect(@server1.nodes).to be_eql ''
+  #   end
+  # end
 end

@@ -29,15 +29,17 @@ module Proxmox
     #
     #   Proxmox::Proxmox.new('https://the-proxmox-server:8006/api2/json/', 'node', 'root', 'secret', 'pam', {verify_ssl: false})
     #
-    def initialize(pve_cluster, node, username, password, realm, ssl_options = {})
-      @pve_cluster = pve_cluster
-      @node = node
-      @username = username
-      @password = password
-      @realm = realm
-      @ssl_options = ssl_options
+    def initialize(**opts)
+      @pay = opts[:pay]
+      @pve_cluster = opts[:url]
+      @node = opts[:node]
+      @username = opts[:username]
+      @password = opts[:password]
+      @realm = opts[:realm]
+      @ssl_options = opts[:ssl_options]
+      @site = opts[:client] || RestClient::Resource.new(@pve_cluster, @ssl_options)
+
       @connection_status = 'error'
-      @site = RestClient::Resource.new(@pve_cluster, @ssl_options)
       @auth_params = create_ticket
     end
 
@@ -82,6 +84,10 @@ module Proxmox
       else
         "#{status}"
       end
+    end
+
+    def nodes
+      get('/api2/json/nodes')
     end
     
     private
