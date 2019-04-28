@@ -4,6 +4,7 @@ require 'proxmox/version'
 require 'rest_client'
 require 'json'
 
+require_relative './proxmox/node'
 require_relative './proxmox/openvz'
 require_relative './proxmox/qemu'
 
@@ -27,12 +28,12 @@ module Proxmox
     #
     # Example:
     #
-    #   Proxmox::Proxmox.new('https://the-proxmox-server:8006/api2/json/', 'node', 'root', 'secret', 'pam', {verify_ssl: false})
+    #   Proxmox::Proxmox.new(url: 'https://the-proxmox-server:8006/api2/json/', node: 'node', username: 'root', password: 'secret', realm: 'pam', {verify_ssl: false})
     #
     def initialize(**opts)
       @pay = opts[:pay]
       @pve_cluster = opts[:url]
-      @node = opts[:node]
+      @node = opts[:node] || 'node'
       @username = opts[:username]
       @password = opts[:password]
       @realm = opts[:realm]
@@ -87,7 +88,8 @@ module Proxmox
     end
 
     def nodes
-      get('/api2/json/nodes')
+      json_response = get('/api2/json/nodes')
+      json_response.map{ |node| Node.factory_from_json(node)}
     end
     
     private

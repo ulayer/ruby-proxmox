@@ -292,12 +292,28 @@ describe Proxmox do
     end
   end
 
-  # describe 'nodes' do
-  #   it 'should get a list of nodes' do
-  #     stub_request(:get, "http://localhost:8006/api2/json/nodes").
-  #         with(headers: @common_headers_in).
-  #         to_return(status: 200, body: "", headers: {})
-  #     expect(@server1.nodes).to be_eql ''
-  #   end
-  # end
+  describe 'nodes' do
+    it 'should get a list of nodes' do
+      stub_request(:get, "http://localhost:8006/api2/json//api2/json/nodes").
+          with(headers: @common_headers_in).
+          to_return(
+              status: 200,
+              body: '{"data":[{"node":"my_node","mem":65118486528,"cpu":0.0878811061129038,"maxcpu":16,"id":"node/my_node","status":"online","type":"node","level":"","maxmem":84452896768,"disk":4445147136,"uptime":27682668,"maxdisk":38836535296,"ssl_fingerprint":"0E:C1:C1:ED:54:33:CD:8D:D0:31:FF:42:DF:21:8A:4D:9E:CB:1D:22:FE:CD:4C:E9:F7:77:0B:EB:60:5E:A5:83"}]}',
+              headers: {})
+
+      expect(@server1.nodes).to eq [Node.new(
+          cpu: 0.0878811061129038,
+          level: '',
+          maxcpu: 16,
+          maxmem: 84452896768,
+          mem: 65118486528,
+          node: 'my_node',
+          disk: 4445147136,
+          maxdisk: 38836535296,
+          id: 'node/my_node',
+          ssl_fingerprint: '0E:C1:C1:ED:54:33:CD:8D:D0:31:FF:42:DF:21:8A:4D:9E:CB:1D:22:FE:CD:4C:E9:F7:77:0B:EB:60:5E:A5:83',
+          status: 'online',
+          type: 'node', uptime: 27682668)]
+    end
+  end
 end
